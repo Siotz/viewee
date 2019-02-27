@@ -50,6 +50,10 @@ npm install node-sass
 
 - git flow feature start <feat-name>
 - some change -> add, commit, push to feature/<feat-name>
+    git add .
+    git commit -m "commit message"
+    git push feature/<feat-name>
+
 - git flow feature finish <feat-name>
 
 - git pull origin develop
