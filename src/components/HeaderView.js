@@ -1,12 +1,28 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import LoginForm from "../containers/LoginForm";
+import LoginModal from "../pages/LoginModal";
+import { Modal, ModalBody } from "reactstrap";
 
 export default class HeaderView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false
+    };
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
+
   render() {
     const { username, logout, history } = this.props;
     return (
       <div>
-        <Link to="/">쇼핑몰</Link>
         {username ? (
           <>
             <div>{username}</div>
@@ -20,7 +36,21 @@ export default class HeaderView extends Component {
             </button>
           </>
         ) : (
-          <Link to="/login">로그인</Link>
+          <button onClick={this.toggle}>로그인</button>
+        )}
+        {this.state.modal && (
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggle}
+            className={this.props.className}
+            // backdrop="static"
+          >
+            <ModalBody>
+              <LoginModal>
+                <LoginForm />
+              </LoginModal>
+            </ModalBody>
+          </Modal>
         )}
       </div>
     );

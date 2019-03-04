@@ -6,6 +6,7 @@ import rootReducer from "./store/ducks";
 import { Provider } from "react-redux";
 
 import "./index.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 

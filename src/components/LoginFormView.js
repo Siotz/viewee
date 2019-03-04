@@ -37,7 +37,7 @@ export default class LoginFromView extends Component {
   render() {
     const { username, password, success } = this.state;
     if (success) {
-      return <Redirect to="/" />;
+      // TODO: 모달 끄기
     }
     return (
       <div>
