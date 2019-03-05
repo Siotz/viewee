@@ -18,7 +18,7 @@ export default class DramaBackground extends Component {
         className={s.background}
         style={{ backgroundImage: `url(${background})` }}
       >
-        <h1 className="readable-hidden">{title}</h1>
+        {/* <h1 className="readable-hidden">{title}</h1> */}
       </section>
     );
   }
