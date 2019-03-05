@@ -14,12 +14,12 @@ export default class DramaBackground extends Component {
   render() {
     const { background, title } = this.state;
     return (
-      <div
+      <section
         className={s.background}
         style={{ backgroundImage: `url(${background})` }}
       >
         <h1 className="readable-hidden">{title}</h1>
-      </div>
+      </section>
     );
   }
 }
