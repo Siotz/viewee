@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import LoginForm from "../containers/LoginForm";
-import LoginModal from "../pages/LoginModal";
 import { Modal, ModalBody } from "reactstrap";
 
 export default class HeaderView extends Component {
@@ -46,9 +45,7 @@ export default class HeaderView extends Component {
             // backdrop="static"
           >
             <ModalBody>
-              <LoginModal>
-                <LoginForm />
-              </LoginModal>
+              <LoginForm />
             </ModalBody>
           </Modal>
         )}
