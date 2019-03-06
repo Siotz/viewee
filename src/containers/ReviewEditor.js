@@ -1,33 +1,47 @@
 import React, { Component } from 'react'
-import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
+import ReviewDetailView from '../components/ReviewDetailView';
+import { EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
 import api from '../api';
-import s from '../scss/EditorTemplate.module.scss';
 
-export default class EditorTemplate extends Component {
+export default class ReviewEditor extends Component {
     constructor(props) {
         super(props)
         this.state = {
             editorState: EditorState.createEmpty(),
-            edit: false
+            read: false,
+            onChange: this.onChange.bind(this),
+            onSave: this.onSave.bind(this),
+            onUnderlineClick: this.onUnderlineClick.bind(this),
+            onBoldClick: this.onBoldClick.bind(this),
+            onItalicClick: this.onItalicClick.bind(this),
         }
     }
 
     async componentDidMount() {
-        const rawEditorData = await this.getSavedEditorData();
-        if (rawEditorData !== null) {
-            const contentState = convertFromRaw(rawEditorData);
-            this.setState({
-                editorState: EditorState.createWithContent(contentState)
-            });
+        if (this.props.modify) {
+            const rawEditorData = await this.getSavedEditorData();
+            if (rawEditorData !== null) {
+                const contentState = convertFromRaw(rawEditorData);
+                this.setState({
+                    editorState: EditorState.createWithContent(contentState)
+                });
+            }
         }
     }
 
-
     async getSavedEditorData() {
-        const { data: { content } } = await api.get('reviews/3');
+        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get('reviews/3');
+        this.setState({
+            id,
+            dramaId,
+            userId,
+            title,
+            date,
+            tags,
+            thumbnail
+        })
         return content ? JSON.parse(content) : null;
     }
-
 
     onChange = (editorState) => {
         this.setState({ editorState });
@@ -75,31 +89,16 @@ export default class EditorTemplate extends Component {
     //     return false;
     // }
 
-    renderContentAsRawJs() {
-        const contentState = this.state.editorState.getCurrentContent();
-        const raw = convertToRaw(contentState);
-        return JSON.stringify(raw, null, 2);
-    }
+    // renderContentAsRawJs() {
+    //     const contentState = this.state.editorState.getCurrentContent();
+    //     const raw = convertToRaw(contentState);
+    //     return JSON.stringify(raw, null, 2);
+    // }
 
     render() {
         return (
             <div>
-                Editor Template
-                <button onClick={this.onUnderlineClick}>U</button>
-                <button onClick={this.onBoldClick}><b>B</b></button>
-                <button onClick={this.onItalicClick}><em>I</em></button>
-                <div className={s.content}>
-                    <Editor
-                        // handleKeyCommand={this.handleKeyCommand.bind(this)}
-                        editorState={this.state.editorState}
-                        onChange={this.onChange}
-                        readOnly={this.state.edit}
-                    />
-                </div>
-                {/* <div>
-                    <pre>{this.renderContentAsRawJs()}</pre>
-                </div> */}
-                <button onClick={this.onSave.bind(this)}>저장</button>
+                <ReviewDetailView {...this.state} />
             </div>
         )
     }

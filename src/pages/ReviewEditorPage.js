@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import EditorTemplate from '../components/EditorTemplate';
+import ReviewEditor from '../containers/ReviewEditor';
 
 export default class ReviewEditorPage extends Component {
     render() {
         return (
-            <EditorTemplate />
+            <ReviewEditor modify={this.props.modify} />
         )
     }
 }

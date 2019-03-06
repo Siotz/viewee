@@ -2,7 +2,40 @@
 
 .wrap{
     border: 1px solid salmon;
+    .reviewTitle{
+        font-size: 2rem;
+    }
     .thumbnail{
         width: 500px;
+    }
+    .tags{
+        border: 1px solid #ccc;
+        &__item{
+            background-color: royalblue;
+            border-radius: 3px;
+            color: white;
+            padding: 0 5px;
+            margin: 5px;
+        }
+    }
+    .content{
+        border: 1px solid orange;
+        min-height: 300px;
+    }
+    .textEditor{
+        &__item{
+            width: 50px;
+            border: 1px solid white;
+            background-color: #ccc;
+        }
+        .u{
+            text-decoration: underline;
+        }
+        .i{
+            font-style: italic;
+        }
+        .b{
+            font-weight: bold;
+        }
     }
 }

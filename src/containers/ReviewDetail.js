@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReviewDetailView from '../components/ReviewDetailView';
 import Profile from '../containers/Profile';
+import { EditorState, convertFromRaw } from 'draft-js';
 import api from "../api";
 
 export default class ReviewDetail extends Component {
@@ -8,30 +9,42 @@ export default class ReviewDetail extends Component {
         super(props)
 
         this.state = {
+            editorState: EditorState.createEmpty(),
+            read: true,
             id: null,
             dramaId: null,
             userId: null,
             title: "",
             date: "",
-            content: [],
             tags: [],
-            thumbnail: ""
+            thumbnail: "",
         }
     }
 
     async componentDidMount() {
-        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get("reviews/2");
+        const rawEditorData = await this.getSavedEditorData();
+        if (rawEditorData !== null) {
+            const contentState = convertFromRaw(rawEditorData);
+            this.setState({
+                editorState: EditorState.createWithContent(contentState)
+            });
+        }
+    }
+
+    async getSavedEditorData() {
+        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get('reviews/3');
         this.setState({
             id,
             dramaId,
             userId,
             title,
             date,
-            content,
             tags,
             thumbnail
         })
+        return content ? JSON.parse(content) : null;
     }
+
     render() {
         const { userId } = this.state;
         return (

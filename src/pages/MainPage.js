@@ -12,7 +12,8 @@ class MainPage extends Component {
 
         this.state = {
             joy: false,
-            joy2: false
+            joy2: false,
+            joy3: false
         };
     }
 
@@ -25,6 +26,12 @@ class MainPage extends Component {
     clickJoy2() {
         this.setState({
             joy2: true
+        });
+    }
+
+    clickJoy3() {
+        this.setState({
+            joy3: true
         });
     }
 
@@ -41,13 +48,17 @@ class MainPage extends Component {
                         Luna는 어서 귀국해서 Router를 구현하라! 구현하라! 구현하라!
                     </div>
                     <span onClick={() => this.clickJoy()} className={s.joy}>
-                        Joy's test
+                        리뷰 디테일
                     </span>
                     <span onClick={() => this.clickJoy2()} className={s.joy2}>
-                        Joy's test 2
+                        새 Review 쓰기
+                    </span>
+                    <span onClick={() => this.clickJoy3()} className={s.joy3}>
+                        내 Review 수정
                     </span>
                     {this.state.joy ? <ReviewDetailPage /> : null}
-                    {this.state.joy2 ? <ReviewEditorPage /> : null}
+                    {this.state.joy2 ? <ReviewEditorPage modify={false} /> : null}
+                    {this.state.joy3 ? <ReviewEditorPage modify={true} /> : null}
                 </Layout>
             </>
         );
