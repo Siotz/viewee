@@ -1,6 +1,27 @@
 @import "../common.module.scss";
 
+.DramaInformation {
+  background: pink;
+  overflow: hidden;
+}
 .poster {
   width: 162px;
+  float: left;
+}
+.title {
   display: inline-block;
+  background-color: skyblue;
+}
+.tags {
+  li {
+    display: inline-block;
+    &:before {
+      content: "#";
+    }
+  }
+}
+.sub {
+  li {
+    display: inline-block;
+  }
 }
