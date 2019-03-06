@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import UserProvider from "./contexts/UserContext";
 // import LoginModal from "./pages/LoginModal";
 import "./App.css";
+import DetailPage from "./pages/DetailPage";
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
         <UserProvider>
           <>
             <Route exact path="/" component={MainPage} />
+            <Route exact path="/drama" component={DetailPage} />
             {/* <Route path="/login" component={LoginModal} /> */}
           </>
         </UserProvider>

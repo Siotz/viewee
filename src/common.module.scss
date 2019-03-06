@@ -1,0 +1,15 @@
+/******** 숨김 콘텐츠 ********/
+.readable-hidden,
+.skip-nav,
+legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+}
+
+img {
+  width: 100%;
+}
