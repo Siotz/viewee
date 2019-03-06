@@ -13,7 +13,11 @@ class App extends Component {
         <UserProvider>
           <>
             <Route exact path="/" component={MainPage} />
-            <Route exact path="/drama" component={DetailPage} />
+            <Route exact path="/drama/:dramaId" component={DetailPage} />
+            {/* <Route exact path="/review/list" component={리뷰리스트페이지} /> */}
+            {/* <Route exact path="/review/detail/:reviewId" component={리뷰상세페이지} /> */}
+            {/* <Route exact path="/review/posting" component={리뷰작성페이지} /> */}
+            {/* <Route exact path="/users/:userId" component={유저페이지} /> */}
             {/* <Route path="/login" component={LoginModal} /> */}
           </>
         </UserProvider>
