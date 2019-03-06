@@ -9,8 +9,8 @@ export default class LoginFromView extends Component {
     this.state = {
       username: "",
       password: "",
-      success: false,
-      modal: false
+      LoginSuccess: false,
+      SignUpModal: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -18,7 +18,7 @@ export default class LoginFromView extends Component {
 
   toggle() {
     this.setState(prevState => ({
-      modal: !prevState.modal
+      SignUpModal: !prevState.SignUpModal
     }));
   }
 
@@ -34,27 +34,28 @@ export default class LoginFromView extends Component {
     });
   }
 
-  async handleLoginButtonClick() {
+  async handleLoginButtonClick(e) {
     const { onLogin } = this.props;
     const { username, password } = this.state;
+    // e.preventDefault();
     await onLogin(username, password);
     // 로그인이 성공적으로 끝났을때
     this.setState({
-      success: true
+      LoginSuccess: true
     });
   }
 
   render() {
-    const { username, password, success } = this.state;
-    if (success) {
+    const { username, password, LoginSuccess } = this.state;
+    if (LoginSuccess) {
       // TODO: 모달 끄기
     }
     return (
       <div>
         <input
-          type="email"
+          type="text"
           value={username}
-          placeholder="이메일"
+          placeholder="ID"
           onChange={e => this.handleUsernameChange(e)}
         />
         <input
@@ -67,16 +68,8 @@ export default class LoginFromView extends Component {
         <div>
           <span>계정이 없으신가요?</span>
           <button onClick={this.toggle}>회원가입</button>
-          <Modal isOpen={this.state.modal} toggle={this.toggle}>
-            <ModalBody>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </ModalBody>
+          <Modal isOpen={this.state.SignUpModal} toggle={this.toggle}>
+            <ModalBody>{/* <SignUpF */}</ModalBody>
           </Modal>
         </div>
       </div>

@@ -6,7 +6,7 @@ export default class HeaderView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      LoginModal: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -14,7 +14,7 @@ export default class HeaderView extends Component {
 
   toggle() {
     this.setState(prevState => ({
-      modal: !prevState.modal
+      LoginModal: !prevState.LoginModal
     }));
   }
 
@@ -37,9 +37,9 @@ export default class HeaderView extends Component {
         ) : (
           <button onClick={this.toggle}>로그인</button>
         )}
-        {this.state.modal && (
+        {this.state.LoginModal && (
           <Modal
-            isOpen={this.state.modal}
+            isOpen={this.state.LoginModal}
             toggle={this.toggle}
             className={this.props.className}
             // backdrop="static"
