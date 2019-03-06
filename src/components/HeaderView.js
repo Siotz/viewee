@@ -23,6 +23,7 @@ export default class HeaderView extends Component {
     const { username, logout, history } = this.props;
     return (
       <div>
+        Basic Header
         {username ? (
           <>
             <div>{username}</div>
@@ -38,6 +39,7 @@ export default class HeaderView extends Component {
         ) : (
           <button onClick={this.toggle}>로그인</button>
         )}
+        {/* {this.state.modal && <ModalComponent />} */}
         {this.state.modal && (
           <Modal
             isOpen={this.state.modal}
