@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import s from "../scss/SignUpFormView.module.scss";
 
 export default class SignupFormView extends Component {
   constructor(props) {
@@ -41,23 +42,26 @@ export default class SignupFormView extends Component {
       // return <Redirect to="/" />;
     }
     return (
-      <>
-        <input
-          type="text"
-          value={username}
-          placeholder="ID"
-          onChange={e => this.handleUsernameChange(e)}
-        />
-        <input
-          type="password"
-          value={password}
-          placeholder="비밀번호"
-          onChange={e => this.handlePasswordChange(e)}
-        />
-        <button onClick={e => this.handleSignupButtonSubmit(e)}>
-          회원가입
-        </button>
-      </>
+      <div className={s.Modal}>
+        <div className={s.content}>
+          <button onClick={this.props.onClose}>닫기</button>
+          <input
+            type="text"
+            value={username}
+            placeholder="ID"
+            onChange={e => this.handleUsernameChange(e)}
+          />
+          <input
+            type="password"
+            value={password}
+            placeholder="비밀번호"
+            onChange={e => this.handlePasswordChange(e)}
+          />
+          <button onClick={e => this.handleSignupButtonSubmit(e)}>
+            회원가입
+          </button>
+        </div>
+      </div>
     );
   }
 }

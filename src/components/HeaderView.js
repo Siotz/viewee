@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LoginForm from "../containers/LoginForm";
-import { Modal, ModalBody } from "reactstrap";
+import ModalPortal from "../portal/ModalPortal";
+import { throws } from "assert";
 
 export default class HeaderView extends Component {
   constructor(props) {
@@ -8,14 +9,18 @@ export default class HeaderView extends Component {
     this.state = {
       LoginModal: false
     };
-
-    this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.setState(prevState => ({
-      LoginModal: !prevState.LoginModal
-    }));
+  handleOpenLoginModal() {
+    this.setState({
+      LoginModal: true
+    });
+  }
+
+  handleCloseLoginModal() {
+    this.setState({
+      LoginModal: false
+    });
   }
 
   render() {
@@ -36,20 +41,12 @@ export default class HeaderView extends Component {
             </button>
           </>
         ) : (
-          <button onClick={this.toggle}>로그인</button>
+          <button onClick={() => this.handleOpenLoginModal()}>로그인</button>
         )}
-        {/* {this.state.modal && <ModalComponent />} */}
         {this.state.LoginModal && (
-          <Modal
-            isOpen={this.state.LoginModal}
-            toggle={this.toggle}
-            className={this.props.className}
-            // backdrop="static"
-          >
-            <ModalBody>
-              <LoginForm />
-            </ModalBody>
-          </Modal>
+          <ModalPortal>
+            <LoginForm onClose={() => this.handleCloseLoginModal()} />
+          </ModalPortal>
         )}
       </div>
     );

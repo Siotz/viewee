@@ -4,8 +4,8 @@ import { withUser } from "../contexts/UserContext";
 
 class SignUpForm extends Component {
   render() {
-    const { register } = this.props;
-    return <SignupFormView onRegister={register} />;
+    const { register, onClose } = this.props;
+    return <SignupFormView onRegister={register} onClose={onClose} />;
   }
 }
 
