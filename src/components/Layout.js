@@ -25,7 +25,7 @@ class Layout extends Component {
           // 이외 페이지일 때
           <Header />
         )}
-        {/* <Header /> */}
+        <Header />
         {this.props.children}
         <Footer />
       </React.Fragment>
