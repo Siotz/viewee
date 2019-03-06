@@ -39,7 +39,7 @@ export default class HeaderView extends Component {
           <button onClick={this.toggle}>로그인</button>
         )}
         {/* {this.state.modal && <ModalComponent />} */}
-        {this.state.modal && (
+        {this.state.LoginModal && (
           <Modal
             isOpen={this.state.LoginModal}
             toggle={this.toggle}

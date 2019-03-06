@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Modal, ModalBody } from "reactstrap";
+import SignUpForm from "../containers/SignUpForm";
 
 export default class LoginFromView extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ export default class LoginFromView extends Component {
     this.state = {
       username: "",
       password: "",
-      LoginSuccess: false,
+      loginSuccess: false,
       SignUpModal: false
     };
 
@@ -41,13 +42,13 @@ export default class LoginFromView extends Component {
     await onLogin(username, password);
     // 로그인이 성공적으로 끝났을때
     this.setState({
-      LoginSuccess: true
+      loginSuccess: true
     });
   }
 
   render() {
-    const { username, password, LoginSuccess } = this.state;
-    if (LoginSuccess) {
+    const { username, password, loginSuccess } = this.state;
+    if (loginSuccess) {
       // TODO: 모달 끄기
     }
     return (
@@ -69,7 +70,9 @@ export default class LoginFromView extends Component {
           <span>계정이 없으신가요?</span>
           <button onClick={this.toggle}>회원가입</button>
           <Modal isOpen={this.state.SignUpModal} toggle={this.toggle}>
-            <ModalBody>{/* <SignUpF */}</ModalBody>
+            <ModalBody>
+              <SignUpForm />
+            </ModalBody>
           </Modal>
         </div>
       </div>
