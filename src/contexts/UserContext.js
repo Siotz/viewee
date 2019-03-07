@@ -12,7 +12,8 @@ export default class UserProvider extends Component {
       id: null,
       username: null,
       login: this.login.bind(this),
-      logout: this.logout.bind(this)
+      logout: this.logout.bind(this),
+      register: this.register.bind(this)
     };
   }
 
@@ -29,7 +30,6 @@ export default class UserProvider extends Component {
     });
     localStorage.setItem("token", res.data.token);
     await this.refreshUser();
-    // TODO: 게시글 목록 보여주기
   }
 
   logout() {
@@ -43,11 +43,30 @@ export default class UserProvider extends Component {
     // TODO: 로그인 폼 보여주기
   }
 
+  // 회원가입
+  async register(username, password) {
+    const res = await api.get("/users", {
+      params: {
+        username
+      }
+    });
+    if (res.data.length > 0) {
+      alert("동일한 아이디가 존재합니다.");
+    } else {
+      const res2 = await api.post("/users/register", {
+        username,
+        password
+      });
+      localStorage.setItem("token", res2.data.token);
+    }
+    await this.refreshUser();
+  }
+
   async refreshUser() {
-    const res2 = await api.get("/me");
+    const res = await api.get("/me");
     this.setState({
-      id: res2.data.id,
-      username: res2.data.username
+      id: res.data.id,
+      username: res.data.username
     });
   }
 

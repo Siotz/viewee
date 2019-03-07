@@ -4,8 +4,8 @@ import { withUser } from "../contexts/UserContext";
 
 class LoginForm extends Component {
   render() {
-    const { login } = this.props;
-    return <LoginFormView onLogin={login} />;
+    const { login, onClose } = this.props;
+    return <LoginFormView onLogin={login} onClose={onClose} />;
   }
 }
 
