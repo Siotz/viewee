@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReviewEditor from '../containers/ReviewEditor';
+import Layout from '../components/Layout';
 
 export default class ReviewEditorPage extends Component {
     constructor(props) {
@@ -8,13 +9,15 @@ export default class ReviewEditorPage extends Component {
         this.state = {
             // true 면, /review/posting 내 글 수정하기
             // false 면, /review/posting 새글 쓰기
-            modify: true
+            modify: false
         }
     }
 
     render() {
         return (
-            <ReviewEditor modify={this.state.modify} />
+            <Layout>
+                <ReviewEditor modify={this.state.modify} />
+            </Layout>
         )
     }
 }

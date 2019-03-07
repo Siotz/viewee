@@ -33,7 +33,8 @@ export default class ReviewDetail extends Component {
     }
 
     async getSavedEditorData() {
-        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get('reviews/3');
+        const { reviewId } = this.props;
+        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get(`reviews/${reviewId}`);
         this.setState({
             id,
             dramaId,

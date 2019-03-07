@@ -65,7 +65,10 @@ export default class ReviewDetailView extends Component {
                     {
                         // 읽기 전용일 땐 저장 버튼 안보이게 하기
                         read ? null : (
-                            <button onClick={onSave}>저장</button>
+                            <>
+                                <button onClick={onSave}>저장</button>
+                                <button>미리보기</button>
+                            </>
                         )
                     }
                 </div>
