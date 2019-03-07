@@ -21,6 +21,7 @@ export default class ReviewDetail extends Component {
         }
     }
 
+    // To do : componentDidMount 와 getSavedEditorData 중복 해결
     async componentDidMount() {
         const rawEditorData = await this.getSavedEditorData();
         if (rawEditorData !== null) {

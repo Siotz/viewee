@@ -10,7 +10,8 @@ export default class ReviewDetailView extends Component {
         title: "",
         date: getDate(),
         tags: [],
-        thumbnail: ""
+        thumbnail: "",
+        modify: false
     }
 
     render() {
@@ -35,6 +36,10 @@ export default class ReviewDetailView extends Component {
                         }
                     </div>
                     <span className={s.date}>날짜 : {date}</span>
+                    {
+                        // To do : userId에 따라서 내 글이면 수정하기 버튼으로 변경하기
+                        read ? <button>추천하기</button> : null
+                    }
                     {
                         // 읽기 전용 아닐 때만 텍스트 편집기띄우기
                         // To do : 이 부분 function component로 빼기
