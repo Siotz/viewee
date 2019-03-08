@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import SignUpForm from "../containers/SignUpForm";
+import { throws } from "assert";
+import ModalPortal from "../portal/ModalPortal";
+import s from "../scss/LoginFormView.module.scss";
 
 export default class LoginFromView extends Component {
   constructor(props) {
@@ -8,8 +12,21 @@ export default class LoginFromView extends Component {
     this.state = {
       username: "",
       password: "",
-      success: false
+      loginSuccess: false,
+      SignUpModal: false
     };
+  }
+
+  handleOpenModal() {
+    this.setState({
+      SignUpModal: true
+    });
+  }
+
+  handleCloseModal(e) {
+    this.setState({
+      SignUpModal: false
+    });
   }
 
   handleUsernameChange(e) {
@@ -24,34 +41,52 @@ export default class LoginFromView extends Component {
     });
   }
 
-  async handleLoginButtonClick() {
+  async handleLoginButtonClick(e) {
     const { onLogin } = this.props;
     const { username, password } = this.state;
+    // e.preventDefault();
     await onLogin(username, password);
     // 로그인이 성공적으로 끝났을때
     this.setState({
-      success: true
+      loginSuccess: true
     });
   }
 
   render() {
-    const { username, password, success } = this.state;
-    if (success) {
+    const { username, password, loginSuccess } = this.state;
+    if (loginSuccess) {
       // TODO: 모달 끄기
     }
     return (
-      <div>
-        <input
-          type="text"
-          value={username}
-          onChange={e => this.handleUsernameChange(e)}
-        />
-        <input
-          type="text"
-          value={password}
-          onChange={e => this.handlePasswordChange(e)}
-        />
-        <button onClick={() => this.handleLoginButtonClick()}>로그인</button>
+      <div className={s.Modal}>
+        <div className={s.content}>
+          <button onClick={this.props.onClose}>닫기</button>
+          <input
+            type="text"
+            value={username}
+            placeholder="ID"
+            onChange={e => this.handleUsernameChange(e)}
+          />
+          <input
+            type="password"
+            value={password}
+            placeholder="비밀번호"
+            onChange={e => this.handlePasswordChange(e)}
+          />
+          <button onClick={() => this.handleLoginButtonClick()}>로그인</button>
+          <div>
+            <span>계정이 없으신가요?</span>
+            <button onClick={() => this.handleOpenModal()}>회원가입</button>
+            {this.state.SignUpModal && (
+              <ModalPortal>
+                <SignUpForm
+                  onClose={() => this.handleCloseModal()}
+                  LoginModal
+                />
+              </ModalPortal>
+            )}
+          </div>
+        </div>
       </div>
     );
   }
