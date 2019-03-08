@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import s from "../scss/SignUpFormView.module.scss";
+import s from "../scss/LoginFormView.module.scss";
 
 export default class SignupFormView extends Component {
   constructor(props) {
@@ -42,24 +42,51 @@ export default class SignupFormView extends Component {
       // return <Redirect to="/" />;
     }
     return (
-      <div className={s.Modal}>
-        <div className={s.content}>
-          <button onClick={this.props.onClose}>닫기</button>
-          <input
-            type="text"
-            value={username}
-            placeholder="ID"
-            onChange={e => this.handleUsernameChange(e)}
-          />
-          <input
-            type="password"
-            value={password}
-            placeholder="비밀번호"
-            onChange={e => this.handlePasswordChange(e)}
-          />
-          <button onClick={e => this.handleSignupButtonSubmit(e)}>
-            회원가입
-          </button>
+      <div className={s.Modal__bg}>
+        <div className={s.Modal__content}>
+          <header>
+            <h1 className={s.logo}>
+              <span className={s.readableHidden}>로고</span>
+            </h1>
+            <a
+              type="button"
+              onClick={this.props.onClose}
+              className={s.btn_close}
+            >
+              닫기
+            </a>
+          </header>
+          <section>
+            <h2 className={s.Modal__tit}>회원가입</h2>
+            <input
+              type="text"
+              value={username}
+              placeholder="ID"
+              onChange={e => this.handleUsernameChange(e)}
+              tabIndex="1"
+            />
+            <input
+              type="password"
+              value={password}
+              placeholder="비밀번호"
+              onChange={e => this.handlePasswordChange(e)}
+              tabIndex="1"
+            />
+            <button
+              className={s.btn_simple}
+              onClick={e => this.handleSignupButtonSubmit(e)}
+            >
+              회원가입
+            </button>
+            <div>
+              <div className={s.area}>
+                <span>이미 가입?</span>
+                <a className={s.link}>&nbsp;로그인</a>
+              </div>
+              <hr />
+              <button className={s.btn_goFacebook}>Facebook으로 로그인</button>
+            </div>
+          </section>
         </div>
       </div>
     );
