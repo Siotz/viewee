@@ -37,14 +37,10 @@ class ReviewDetail extends Component {
     }
 
     async getSavedEditorData() {
-<<<<<<< HEAD
         const { reviewId } = this.props;
         const {
             data: { id, dramaId, userId, title, date, content, tags, thumbnail }
         } = await api.get(`reviews/${reviewId}`);
-=======
-        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get('reviews/3');
->>>>>>> 742cd56a7e6fc307f60f7059510ab5f43b7eddac
         this.setState({
             id,
             dramaId,
