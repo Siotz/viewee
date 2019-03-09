@@ -3,6 +3,7 @@ import { Editor } from 'draft-js';
 import s from "../scss/ReviewDetailView.module.scss";
 import classNames from 'classnames';
 import { getDate } from '../modules/moduleFunc';
+import { EditorState } from 'draft-js';
 
 export default class ReviewDetailView extends Component {
     // Set default props
@@ -10,13 +11,14 @@ export default class ReviewDetailView extends Component {
         title: "",
         date: getDate(),
         tags: [],
-        thumbnail: ""
+        thumbnail: "",
+        editorState: EditorState.createEmpty()
     }
 
     render() {
         const {
             id, dramaId, title, date, tags, thumbnail,
-            editorState, read,
+            read,
             onChange, onSave, onUnderlineClick, onBoldClick, onItalicClick
         } = this.props;
         return (
@@ -49,7 +51,7 @@ export default class ReviewDetailView extends Component {
                     <div className={s.content}>
                         <Editor
                             // handleKeyCommand={this.handleKeyCommand.bind(this)}
-                            editorState={editorState}
+                            editorState={this.props.editorState}
                             onChange={onChange}
                             readOnly={read}
                         />
@@ -60,7 +62,10 @@ export default class ReviewDetailView extends Component {
                     {
                         // 읽기 전용일 땐 저장 버튼 안보이게 하기
                         read ? null : (
-                            <button onClick={onSave}>저장</button>
+                            <>
+                                <button onClick={onSave}>저장</button>
+                                <button>미리보기</button>
+                            </>
                         )
                     }
                 </div>

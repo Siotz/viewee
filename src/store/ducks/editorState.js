@@ -1,4 +1,3 @@
-
 import { EditorState } from 'draft-js';
 
 // 액션 타입 정의

@@ -11,7 +11,6 @@ class ReviewDetail extends Component {
         super(props);
 
         this.state = {
-            editorState: EditorState.createEmpty(),
             read: true,
             id: null,
             dramaId: null,
@@ -24,16 +23,11 @@ class ReviewDetail extends Component {
     }
 
     async componentDidMount() {
-        // console.log(this.props.editorState);
         const rawEditorData = await this.getSavedEditorData();
         if (rawEditorData !== null) {
             const contentState = convertFromRaw(rawEditorData);
-            //   this.setState({
-            //     editorState: EditorState.createWithContent(contentState)
-            //   });
             this.props.changeContent(EditorState.createWithContent(contentState));
         }
-        // console.log(this.props.editorState);
     }
 
     async getSavedEditorData() {
@@ -57,7 +51,7 @@ class ReviewDetail extends Component {
         const { userId } = this.state;
         return (
             <div>
-                <ReviewDetailView {...this.state} {...this.props} />
+                <ReviewDetailView key={this.props.editorState} {...this.state} />
                 {/* userId가 state로 늦게 들어가는 현상으로 인해 key를 userId로 줌 */}
                 <Profile key={userId} userId={userId} />
             </div>
