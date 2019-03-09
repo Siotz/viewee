@@ -6,7 +6,8 @@ export default class DramaBackground extends Component {
     super(props);
 
     this.state = {
-      background: "https://i.ytimg.com/vi/w1iuWzMVRUw/maxresdefault.jpg",
+      background:
+        "https://s3.amazonaws.com/lyl-resto-heroku/5731ad5dacc38c00030db98b/5731ae4eacc38c00030ddc50/maxresdefault.jpg",
       title: "워킹데드"
     };
   }
