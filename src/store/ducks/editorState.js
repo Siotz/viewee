@@ -17,7 +17,7 @@ export default function editorState(state = initialState, action) {
     switch (action.type) {
         case CHANGE_CONTENT:
             return {
-                // ...state,
+                ...state,
                 editorState: action.editorState,
             };
         default:

@@ -50,42 +50,67 @@ export default class LoginFromView extends Component {
     this.setState({
       loginSuccess: true
     });
+    // TODO: 로그인이 실피했을때
   }
 
   render() {
     const { username, password, loginSuccess } = this.state;
     if (loginSuccess) {
-      // TODO: 모달 끄기
+      // 모달 끄기
     }
     return (
-      <div className={s.Modal}>
-        <div className={s.content}>
-          <button onClick={this.props.onClose}>닫기</button>
-          <input
-            type="text"
-            value={username}
-            placeholder="ID"
-            onChange={e => this.handleUsernameChange(e)}
-          />
-          <input
-            type="password"
-            value={password}
-            placeholder="비밀번호"
-            onChange={e => this.handlePasswordChange(e)}
-          />
-          <button onClick={() => this.handleLoginButtonClick()}>로그인</button>
-          <div>
-            <span>계정이 없으신가요?</span>
-            <button onClick={() => this.handleOpenModal()}>회원가입</button>
-            {this.state.SignUpModal && (
-              <ModalPortal>
-                <SignUpForm
-                  onClose={() => this.handleCloseModal()}
-                  LoginModal
-                />
-              </ModalPortal>
-            )}
-          </div>
+      <div className={s.Modal__bg}>
+        <div className={s.Modal__content}>
+          <header>
+            <h1 className={s.logo}>
+              <span className={s.readableHidden}>로고</span>
+            </h1>
+            <button
+              type="button"
+              onClick={this.props.onClose}
+              className={s.btn_close}
+            >
+              닫기
+            </button>
+          </header>
+          <section>
+            <h2 className={s.Modal__tit}>로그인</h2>
+            <input
+              type="text"
+              value={username}
+              placeholder="ID"
+              onChange={e => this.handleUsernameChange(e)}
+              tabIndex="1"
+            />
+            <input
+              type="password"
+              value={password}
+              placeholder="비밀번호"
+              onChange={e => this.handlePasswordChange(e)}
+              tabIndex="1"
+            />
+            <button
+              className={s.btn_simple}
+              onClick={() => this.handleLoginButtonClick()}
+            >
+              로그인
+            </button>
+            <div>
+              <div className={s.area}>
+                <span>계정이 없으신가요?</span>
+                <a onClick={() => this.handleOpenModal()} className={s.link}>
+                  &nbsp;회원가입
+                </a>
+              </div>
+              <hr />
+              <button className={s.btn_goFacebook}>Facebook으로 로그인</button>
+              {this.state.SignUpModal && (
+                <ModalPortal>
+                  <SignUpForm onClose={() => this.handleCloseModal()} />
+                </ModalPortal>
+              )}
+            </div>
+          </section>
         </div>
       </div>
     );

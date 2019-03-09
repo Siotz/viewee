@@ -4,8 +4,8 @@ import MainPage from "./pages/MainPage";
 import UserProvider from "./contexts/UserContext";
 import "./App.css";
 import DetailPage from "./pages/DetailPage";
-import ReviewDetailPage from './pages/ReviewDetailPage';
-import ReviewEditorPage from './pages/ReviewEditorPage'
+import ReviewDetailPage from "./pages/ReviewDetailPage";
+import ReviewEditorPage from './pages/ReviewEditorPage';
 
 class App extends Component {
     render() {
