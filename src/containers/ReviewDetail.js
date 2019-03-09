@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
-import ReviewDetailView from '../components/ReviewDetailView';
-import Profile from '../containers/Profile';
-import { EditorState, convertFromRaw } from 'draft-js';
+import React, { Component } from "react";
+import ReviewDetailView from "../components/ReviewDetailView";
+import Profile from "../containers/Profile";
+import { EditorState, convertFromRaw } from "draft-js";
 import api from "../api";
+import { connect } from "react-redux";
+import { changeContent } from "../store/ducks/editorState";
 
-export default class ReviewDetail extends Component {
+class ReviewDetail extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             editorState: EditorState.createEmpty(),
@@ -17,24 +19,29 @@ export default class ReviewDetail extends Component {
             title: "",
             date: "",
             tags: [],
-            thumbnail: "",
-        }
+            thumbnail: ""
+        };
     }
 
     // To do : componentDidMount 와 getSavedEditorData 중복 해결
     async componentDidMount() {
+        // console.log(this.props.editorState);
         const rawEditorData = await this.getSavedEditorData();
         if (rawEditorData !== null) {
             const contentState = convertFromRaw(rawEditorData);
-            this.setState({
-                editorState: EditorState.createWithContent(contentState)
-            });
+            //   this.setState({
+            //     editorState: EditorState.createWithContent(contentState)
+            //   });
+            this.props.changeContent(EditorState.createWithContent(contentState));
         }
+        // console.log(this.props.editorState);
     }
 
     async getSavedEditorData() {
         const { reviewId } = this.props;
-        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get(`reviews/${reviewId}`);
+        const {
+            data: { id, dramaId, userId, title, date, content, tags, thumbnail }
+        } = await api.get(`reviews/${reviewId}`);
         this.setState({
             id,
             dramaId,
@@ -43,7 +50,7 @@ export default class ReviewDetail extends Component {
             date,
             tags,
             thumbnail
-        })
+        });
         return content ? JSON.parse(content) : null;
     }
 
@@ -51,10 +58,26 @@ export default class ReviewDetail extends Component {
         const { userId } = this.state;
         return (
             <div>
-                <ReviewDetailView {...this.state} />
+                <ReviewDetailView {...this.state} {...this.props} />
                 {/* userId가 state로 늦게 들어가는 현상으로 인해 key를 userId로 줌 */}
                 <Profile key={userId} userId={userId} />
             </div>
-        )
+        );
     }
 }
+
+const mapStateToProps = state => ({
+    editorState: state.editorState.editorState
+});
+
+const mapDispatchToProps = {
+    changeContent
+};
+// const mapDispatchToProps = ({
+//     changeContent: () => dispatch(changeContent)
+// })
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ReviewDetail);
