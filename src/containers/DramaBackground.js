@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import s from "../scss/DramaBackground.module.scss";
+import s from "../scss/DramaDetailCommon.module.scss";
 
 export default class DramaBackground extends Component {
   constructor(props) {
