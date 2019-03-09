@@ -68,3 +68,7 @@ export default class ReviewDetailView extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    editorState: state.editorState.editorState
+});
