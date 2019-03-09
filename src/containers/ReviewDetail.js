@@ -21,7 +21,6 @@ export default class ReviewDetail extends Component {
         }
     }
 
-    // To do : componentDidMount 와 getSavedEditorData 중복 해결
     async componentDidMount() {
         const rawEditorData = await this.getSavedEditorData();
         if (rawEditorData !== null) {
@@ -33,8 +32,7 @@ export default class ReviewDetail extends Component {
     }
 
     async getSavedEditorData() {
-        const { reviewId } = this.props;
-        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get(`reviews/${reviewId}`);
+        const { data: { id, dramaId, userId, title, date, content, tags, thumbnail } } = await api.get('reviews/3');
         this.setState({
             id,
             dramaId,
