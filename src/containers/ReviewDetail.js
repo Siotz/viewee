@@ -36,6 +36,7 @@ class ReviewDetail extends Component {
     // console.log(this.props.editorState);
   }
 
+<<<<<<< HEAD
   async getSavedEditorData() {
     const { reviewId } = this.props;
     const {
@@ -52,6 +53,24 @@ class ReviewDetail extends Component {
     });
     return content ? JSON.parse(content) : null;
   }
+=======
+    async getSavedEditorData() {
+        const { reviewId } = this.props;
+        const {
+            data: { id, dramaId, userId, title, date, content, tags, thumbnail }
+        } = await api.get(`reviews/${reviewId}`);
+        this.setState({
+            id,
+            dramaId,
+            userId,
+            title,
+            date,
+            tags,
+            thumbnail
+        });
+        return content ? JSON.parse(content) : null;
+    }
+>>>>>>> f2f9e6eb17bf5923988ae038bcf921ab517b4eab
 
   render() {
     const { userId } = this.state;
