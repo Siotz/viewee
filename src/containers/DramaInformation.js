@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import s from "../scss/DramaInformation.module.scss";
+import s from "../scss/DramaDetailCommon.module.scss";
 
 export default class DramaInformation extends Component {
   constructor(props) {

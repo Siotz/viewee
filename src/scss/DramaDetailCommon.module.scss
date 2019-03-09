@@ -1,0 +1,65 @@
+@import "../common.module.scss";
+
+// 상단 백그라운드 부분 스타일
+.background {
+  width: 100%;
+  // height: 360px;
+  height: 60px; // 코딩용 임시
+  background-color: gold;
+  background-size: cover;
+}
+
+// 드라마 정보 부분 스타일
+
+.DramaInformation {
+  background: pink;
+  overflow: hidden;
+  .poster {
+    width: 162px;
+    float: left;
+  }
+  .title {
+    display: inline-block;
+    background-color: skyblue;
+  }
+  .tags {
+    li {
+      display: inline-block;
+      &:before {
+        content: "#";
+      }
+    }
+  }
+  .sub {
+    li {
+      display: inline-block;
+    }
+  }
+}
+// DramaDataView 드라마 정보들 레이아웃 스타일
+.DramaDataView {
+  .DataTitle {
+    position: sticky;
+    top: 0px;
+    background-color: gold;
+    h4 {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+  }
+}
+
+// 평점 그래프
+.DramaRatingGraph {
+  background-color: salmon;
+}
+
+// 스틸컷 스타일
+.DramaStillcuts {
+  background-color: skyblue;
+}
+
+// 시리즈 스타일
+.DramaSeries {
+  background-color: olive;
+}
