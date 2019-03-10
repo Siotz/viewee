@@ -12,8 +12,8 @@ export default class UserProvider extends Component {
       id: null,
       username: null,
       login: this.login.bind(this),
-      logout: this.logout.bind(this),
-      register: this.register.bind(this)
+      register: this.register.bind(this),
+      logout: this.logout.bind(this)
     };
   }
 
@@ -28,6 +28,7 @@ export default class UserProvider extends Component {
       username,
       password
     });
+
     localStorage.setItem("token", res.data.token);
     await this.refreshUser();
   }

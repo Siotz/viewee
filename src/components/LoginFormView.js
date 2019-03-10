@@ -12,7 +12,6 @@ export default class LoginFromView extends Component {
     this.state = {
       username: "",
       password: "",
-      loginSuccess: false,
       SignUpModal: false
     };
   }
@@ -47,17 +46,13 @@ export default class LoginFromView extends Component {
     // e.preventDefault();
     await onLogin(username, password);
     // 로그인이 성공적으로 끝났을때
-    this.setState({
-      loginSuccess: true
-    });
-    // TODO: 로그인이 실피했을때
+    alert(`${this.state.username}님 로그인하셨습니다.`);
+    // TODO: 로그인이 실패했을때
   }
 
   render() {
-    const { username, password, loginSuccess } = this.state;
-    if (loginSuccess) {
-      // 모달 끄기
-    }
+    const { username, password } = this.state;
+    console.log("로그인후 모달 상태", this.props.LoginModal);
     return (
       <div className={s.Modal__bg}>
         <div className={s.Modal__content}>
@@ -67,7 +62,7 @@ export default class LoginFromView extends Component {
             </h1>
             <button
               type="button"
-              onClick={this.props.onClose}
+              onClick={() => this.props.onClose()}
               className={s.btn_close}
             >
               닫기
@@ -91,7 +86,10 @@ export default class LoginFromView extends Component {
             />
             <button
               className={s.btn_simple}
-              onClick={() => this.handleLoginButtonClick()}
+              onClick={() => {
+                this.handleLoginButtonClick();
+                this.props.onClose();
+              }}
             >
               로그인
             </button>

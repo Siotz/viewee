@@ -25,6 +25,7 @@ export default class HeaderView extends Component {
 
   render() {
     const { username, logout, history } = this.props;
+    console.log("로그인모달 상태: ", this.state.LoginModal);
     return (
       <div>
         Basic Header

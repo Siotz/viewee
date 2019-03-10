@@ -14,7 +14,7 @@ export default class SignupFormView extends Component {
   }
 
   async handleSignupButtonSubmit(e) {
-    const { onRegister } = this.props;
+    const { onRegister, history } = this.props;
     const { username, password } = this.state;
     e.preventDefault();
     await onRegister(username, password);
@@ -39,7 +39,6 @@ export default class SignupFormView extends Component {
     const { username, password, registerSuccess } = this.state;
     if (registerSuccess) {
       alert(`${this.state.username}님 회원가입에 성공했습니다.`);
-      // return <Redirect to="/" />;
     }
     return (
       <div className={s.Modal__bg}>
@@ -48,13 +47,13 @@ export default class SignupFormView extends Component {
             <h1 className={s.logo}>
               <span className={s.readableHidden}>로고</span>
             </h1>
-            <a
+            <button
               type="button"
               onClick={this.props.onClose}
               className={s.btn_close}
             >
               닫기
-            </a>
+            </button>
           </header>
           <section>
             <h2 className={s.Modal__tit}>회원가입</h2>
@@ -79,10 +78,10 @@ export default class SignupFormView extends Component {
               회원가입
             </button>
             <div>
-              <div className={s.area}>
+              {/* <div className={s.area}>
                 <span>이미 가입?</span>
                 <a className={s.link}>&nbsp;로그인</a>
-              </div>
+              </div> */}
               <hr />
               <button className={s.btn_goFacebook}>Facebook으로 로그인</button>
             </div>
