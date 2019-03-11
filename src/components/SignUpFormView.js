@@ -45,7 +45,7 @@ export default class SignupFormView extends Component {
         <div className={s.Modal__content}>
           <header>
             <h1 className={s.logo}>
-              <span className={s.readableHidden}>로고</span>
+              <span className="readable-hidden">로고</span>
             </h1>
             <button
               type="button"
