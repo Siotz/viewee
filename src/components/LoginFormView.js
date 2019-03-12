@@ -12,19 +12,19 @@ export default class LoginFromView extends Component {
     this.state = {
       username: "",
       password: "",
-      SignUpModal: false
+      signUpModal: false
     };
   }
 
   handleOpenModal() {
     this.setState({
-      SignUpModal: true
+      signUpModal: true
     });
   }
 
   handleCloseModal(e) {
     this.setState({
-      SignUpModal: false
+      signUpModal: false
     });
   }
 
@@ -102,7 +102,7 @@ export default class LoginFromView extends Component {
               </div>
               <hr />
               <button className={s.btn_goFacebook}>Facebook으로 로그인</button>
-              {this.state.SignUpModal && (
+              {this.state.signUpModal && (
                 <ModalPortal>
                   <SignUpForm onClose={() => this.handleCloseModal()} />
                 </ModalPortal>
