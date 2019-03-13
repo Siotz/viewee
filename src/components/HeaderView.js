@@ -1,40 +1,31 @@
 import React, { Component } from "react";
 import LoginForm from "../containers/LoginForm";
 import ModalPortal from "../portal/ModalPortal";
-import { connect } from "react-redux";
-import { changeLoginModal } from "../store/ducks/loginModalState";
+import { throws } from "assert";
 
-class HeaderView extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.state = {
-  //   //   loginModal: false
-  //   // };
-  // }
-
-  componentDidMount() {
-    console.log(this.props.loginModal);
+export default class HeaderView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      LoginModal: false
+    };
   }
 
   handleOpenLoginModal() {
-    // this.setState({
-    //   loginModal: true
-    // });
-    const { changeLoginModal } = this.props;
-    changeLoginModal(true);
+    this.setState({
+      LoginModal: true
+    });
   }
 
   handleCloseLoginModal() {
-    // this.setState({
-    //   loginModal: false
-    // });
-    const { changeLoginModal } = this.props;
-    changeLoginModal(false);
+    this.setState({
+      LoginModal: false
+    });
   }
 
   render() {
     const { username, logout, history } = this.props;
-    console.log("로그인모달 상태: ", this.props.loginModal);
+    console.log("로그인모달 상태: ", this.state.LoginModal);
     return (
       <div>
         Basic Header
@@ -53,7 +44,7 @@ class HeaderView extends Component {
         ) : (
           <button onClick={() => this.handleOpenLoginModal()}>로그인</button>
         )}
-        {this.props.loginModal && (
+        {this.state.LoginModal && (
           <ModalPortal>
             <LoginForm onClose={() => this.handleCloseLoginModal()} />
           </ModalPortal>
@@ -62,16 +53,3 @@ class HeaderView extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  loginModal: state.loginModal.loginModal
-});
-
-const mapDispatchToProps = {
-  changeLoginModal
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderView);

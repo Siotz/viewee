@@ -1,13 +1,11 @@
 import { combineReducers } from "redux";
 import page from "./page";
-import editorState from "./editorState";
-import dramas from "./dramas";
-import loginModal from "./loginModalState";
+import editorState from './editorState';
+import dramas from './dramas';
 // import 기능별모듈.js파일 from '파일경로';
 
 export default combineReducers({
-  page,
-  editorState,
-  dramas,
-  loginModal
+    page,
+    editorState,
+    dramas
 });
