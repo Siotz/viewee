@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import SignUpForm from "../containers/SignUpForm";
-import ModalPortal from "../portal/ModalPortal";
 import s from "../scss/LoginFormView.module.scss";
 
 export default class LoginFromView extends Component {
@@ -16,11 +14,15 @@ export default class LoginFromView extends Component {
   async handleOpenModal() {
     const { changeModal } = this.props;
     changeModal("signup");
+    const el = document.getElementById("login");
+    document.body.removeChild(el);
   }
 
   async handleCloseModal() {
     const { changeModal } = this.props;
     changeModal("none");
+    const el = document.getElementById("login");
+    document.body.removeChild(el);
   }
 
   handleUsernameChange(e) {
@@ -100,13 +102,6 @@ export default class LoginFromView extends Component {
             </div>
           </section>
         </div>
-        {this.props.modal === "signup" ? (
-          <ModalPortal>
-            <SignUpForm {...this.props} />
-          </ModalPortal>
-        ) : (
-          <div>얍!</div>
-        )}
       </div>
     );
   }

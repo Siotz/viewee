@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import s from "../scss/LoginFormView.module.scss";
 
 export default class SignupFormView extends Component {
@@ -21,6 +20,14 @@ export default class SignupFormView extends Component {
     this.setState({
       registerSuccess: true
     });
+  }
+
+  handleCloseModal() {
+    const { changeModal } = this.props;
+    console.log("changeModal", this.changeModal);
+    changeModal("none");
+    const el = document.getElementById("signup");
+    document.body.removeChild(el);
   }
 
   handleUsernameChange(e) {
@@ -49,7 +56,7 @@ export default class SignupFormView extends Component {
             </h1>
             <button
               type="button"
-              onClick={this.props.onClose}
+              onClick={() => this.handleCloseModal()}
               className={s.btn_close}
             >
               닫기

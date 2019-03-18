@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import LoginForm from "../containers/LoginForm";
-import ModalPortal from "../portal/ModalPortal";
+import LoginPortal from "../portal/LoginPortal";
+import SignupPortal from "../portal/SignupPortal";
+import SignUpForm from "../containers/SignUpForm";
 
 export default class HeaderView extends Component {
   async handleOpenModal() {
@@ -30,12 +32,14 @@ export default class HeaderView extends Component {
           <button onClick={() => this.handleOpenModal()}>로그인</button>
         )}
         {this.props.modal === "login" ? (
-          <ModalPortal>
+          <LoginPortal>
             <LoginForm {...this.props} />
-          </ModalPortal>
-        ) : (
-          <></>
-        )}
+          </LoginPortal>
+        ) : this.props.modal === "signup" ? (
+          <SignupPortal>
+            <SignUpForm {...this.props} />
+          </SignupPortal>
+        ) : null}
       </div>
     );
   }
