@@ -14,7 +14,7 @@ export default class SignupFormView extends Component {
   }
 
   async handleSignupButtonSubmit(e) {
-    const { onRegister, history } = this.props;
+    const { onRegister } = this.props;
     const { username, password } = this.state;
     e.preventDefault();
     await onRegister(username, password);

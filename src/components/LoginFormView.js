@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import SignUpForm from "../containers/SignUpForm";
-import { throws } from "assert";
 import ModalPortal from "../portal/ModalPortal";
 import s from "../scss/LoginFormView.module.scss";
 
@@ -11,21 +9,18 @@ export default class LoginFromView extends Component {
 
     this.state = {
       username: "",
-      password: "",
-      SignUpModal: false
+      password: ""
     };
   }
 
-  handleOpenModal() {
-    this.setState({
-      SignUpModal: true
-    });
+  async handleOpenModal() {
+    const { changeModal } = this.props;
+    changeModal("signup");
   }
 
-  handleCloseModal(e) {
-    this.setState({
-      SignUpModal: false
-    });
+  async handleCloseModal() {
+    const { changeModal } = this.props;
+    changeModal("none");
   }
 
   handleUsernameChange(e) {
@@ -52,7 +47,7 @@ export default class LoginFromView extends Component {
 
   render() {
     const { username, password } = this.state;
-    console.log("로그인후 모달 상태", this.props.LoginModal);
+    console.log(this.props);
     return (
       <div className={s.Modal__bg}>
         <div className={s.Modal__content}>
@@ -62,7 +57,7 @@ export default class LoginFromView extends Component {
             </h1>
             <button
               type="button"
-              onClick={() => this.props.onClose()}
+              onClick={() => this.handleCloseModal()}
               className={s.btn_close}
             >
               닫기
@@ -88,7 +83,7 @@ export default class LoginFromView extends Component {
               className={s.btn_simple}
               onClick={() => {
                 this.handleLoginButtonClick();
-                this.props.onClose();
+                this.handleCloseModal();
               }}
             >
               로그인
@@ -102,14 +97,16 @@ export default class LoginFromView extends Component {
               </div>
               <hr />
               <button className={s.btn_goFacebook}>Facebook으로 로그인</button>
-              {this.state.SignUpModal && (
-                <ModalPortal>
-                  <SignUpForm onClose={() => this.handleCloseModal()} />
-                </ModalPortal>
-              )}
             </div>
           </section>
         </div>
+        {this.props.modal === "signup" ? (
+          <ModalPortal>
+            <SignUpForm {...this.props} />
+          </ModalPortal>
+        ) : (
+          <div>얍!</div>
+        )}
       </div>
     );
   }
