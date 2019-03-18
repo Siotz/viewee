@@ -1,31 +1,16 @@
 import React, { Component } from "react";
 import LoginForm from "../containers/LoginForm";
 import ModalPortal from "../portal/ModalPortal";
-import { throws } from "assert";
 
 export default class HeaderView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      LoginModal: false
-    };
-  }
-
-  handleOpenLoginModal() {
-    this.setState({
-      LoginModal: true
-    });
-  }
-
-  handleCloseLoginModal() {
-    this.setState({
-      LoginModal: false
-    });
+  async handleOpenModal() {
+    const { changeModal } = this.props;
+    changeModal("login");
   }
 
   render() {
     const { username, logout, history } = this.props;
-    console.log("로그인모달 상태: ", this.state.LoginModal);
+    console.log("로그인모달 상태: ", this.props.modal);
     return (
       <div>
         Basic Header
@@ -42,12 +27,14 @@ export default class HeaderView extends Component {
             </button>
           </>
         ) : (
-          <button onClick={() => this.handleOpenLoginModal()}>로그인</button>
+          <button onClick={() => this.handleOpenModal()}>로그인</button>
         )}
-        {this.state.LoginModal && (
+        {this.props.modal === "login" ? (
           <ModalPortal>
-            <LoginForm onClose={() => this.handleCloseLoginModal()} />
+            <LoginForm {...this.props} />
           </ModalPortal>
+        ) : (
+          <></>
         )}
       </div>
     );
